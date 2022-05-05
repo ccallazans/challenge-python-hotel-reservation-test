@@ -7,6 +7,18 @@ def standardize_input(data):
 
     return splitted_data
 
+def read_json(path):
+    file = open(path)
+    return json.load(file)
+
+def set_better_choice(hotel_name, price, rating):
+    value = {
+        'name': hotel_name,
+        'price': price,
+        'rating': rating
+    }
+    return value
+
 def get_day_price(user_input):
     select_index_range = user_input.find('(') + 1
     day = user_input[select_index_range:-1]
@@ -17,23 +29,12 @@ def get_day_price(user_input):
         "wed": 'weekday_price',
         "thur": 'weekday_price',
         "fri": 'weekday_price',
+        
         "sat": 'weekend_price',
         "sun": 'weekend_price',
     }
 
     return dictionary[day]
-
-def set_better_choice(hotel_name, price, rating):
-    value = {
-        'name': hotel_name,
-        'price': price,
-        'rating': rating
-    }
-    return value
-
-def read_json(path):
-    file = open(path)
-    return json.load(file)
 
 def get_reward_program(user_input):
     return user_input[0]
