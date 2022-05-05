@@ -5,6 +5,7 @@ from src.functions import set_better_choice
 def get_cheapest_hotel(user_input):   #DO NOT change the function's name
 
     handled_user_input = standardize_input(user_input)
+    
     reward_program_type = get_reward_program_type(handled_user_input)
     date_type_count = get_date_type_count(handled_user_input)
 
