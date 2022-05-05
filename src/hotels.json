@@ -1,0 +1,40 @@
+{
+    "_comment": "Add hotel data",
+    "hotels": {
+        "Lakewood": {
+            "rating": 3,
+            "weekday_price": {
+                "Regular": 110,
+                "Rewards": 80
+            },
+            "weekend_price": {
+                "Regular": 90,
+                "Rewards": 80
+            }
+        },
+
+        "Bridgewood": {
+            "rating": 4,
+            "weekday_price": {
+                "Regular": 160,
+                "Rewards": 110
+            },
+            "weekend_price": {
+                "Regular": 60,
+                "Rewards": 50
+            }
+        },
+        
+        "Ridgewood": {
+            "rating": 5,
+            "weekday_price": {
+                "Regular": 220,
+                "Rewards": 110
+            },
+            "weekend_price": {
+                "Regular": 150,
+                "Rewards": 40
+            }
+        }
+    }
+}

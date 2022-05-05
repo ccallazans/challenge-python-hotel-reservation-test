@@ -14,4 +14,3 @@ class MyTest(TestCase):
     def test3(self):
         result = "Ridgewood"
         self.assertEqual(result, get_cheapest_hotel("Rewards: 26Mar2009(thur), 27Mar2009(fri), 28Mar2009(sat)"))
-
