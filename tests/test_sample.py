@@ -1,6 +1,7 @@
 from unittest import TestCase
 from context import src
 from src.my_module import get_cheapest_hotel
+from src.functions import get_date_type_count
 
 class MyTest(TestCase):
     def test1(self):
@@ -15,54 +16,64 @@ class MyTest(TestCase):
         result = "Ridgewood"
         self.assertEqual(result, get_cheapest_hotel("Rewards: 26Mar2009(thur), 27Mar2009(fri), 28Mar2009(sat)"))
 
-    def test_one_day_weekday_rewards(self):
-        # Verify only 1 day WEEKDAY and REWARDS
+    def test_one_day_weekday_rewards(self): # Verify only 1 day WEEKDAY and REWARDS
         result = "Lakewood"
         self.assertEqual(result, get_cheapest_hotel("Rewards: 26Mar2009(thur)"))
 
-    def test_one_day_weekday_regular(self):
-        # Verify only 1 day WEEKDAY and REGULAR
+    def test_one_day_weekday_regular(self): # Verify only 1 day WEEKDAY and REGULAR
         result = "Lakewood"
         self.assertEqual(result, get_cheapest_hotel("Regular: 25Mar2009(wed)"))
 
-    def test_one_day_weekend_rewards(self):
-        # Verify only 1 day WEEKEND and REWARDS
+    def test_one_day_weekend_rewards(self): # Verify only 1 day WEEKEND and REWARDS
         result = "Ridgewood"
         self.assertEqual(result, get_cheapest_hotel("Rewards: 28Mar2009(sat)"))
 
-    def test_one_day_weekend_regular(self):
-        # Verify only 1 day WEEKEND and REGULAR
+    def test_one_day_weekend_regular(self): # Verify only 1 day WEEKEND and REGULAR
         result = "Bridgewood"
         self.assertEqual(result, get_cheapest_hotel("Regular: 28Mar2009(sun)"))
 
-    def test_all_week_rewards(self):
-        # Verify one complete week REWARDS
+    def test_all_week_rewards(self): # Verify one complete week REWARDS
         result = "Lakewood"
         week = "Rewards: 22Mar2009(sun), 23Mar2009(mon), 24Mar2009(tues), 25Mar2009(wed), 26Mar2009(thur), 27Mar2009(fri), 28Mar2009(sat)"
         self.assertEqual(result, get_cheapest_hotel(week))
 
-    def test_all_week_regular(self):
-        # Verify one complete week REGULAR
+    def test_all_week_regular(self): # Verify one complete week REGULAR
         result = "Lakewood"
         week = "Regular: 22Mar2009(sun), 23Mar2009(mon), 24Mar2009(tues), 25Mar2009(wed), 26Mar2009(thur), 27Mar2009(fri), 28Mar2009(sat)"
         self.assertEqual(result, get_cheapest_hotel(week))
 
-    def test_weekend_rewards(self):
-        # Verify weekend and Regular
+    def test_weekend_rewards(self): # Verify weekend and Regular
         result = "Ridgewood"
         self.assertEqual(result, get_cheapest_hotel("Rewards: 28Mar2009(sat), 29Mar2009(sun)"))
 
-    def test_weekend_regular(self):
-        # Verify weekend and Regular
+    def test_weekend_regular(self): # Verify weekend and Regular
         result = "Bridgewood"
         self.assertEqual(result, get_cheapest_hotel("Regular: 28Mar2009(sat), 29Mar2009(sun)"))
 
-    def test_weekend_an_weekday_rewards(self):
-        # Verify weekend day and weekday - Regular
+    def test_weekend_an_weekday_rewards(self): # Verify weekend day and weekday - Regular
         result = "Ridgewood"
         self.assertEqual(result, get_cheapest_hotel("Rewards: 29Mar2009(sun), 30Mar2009(mon)"))
 
-    def test_weekend_an_weekday_regular(self):
-        # Verify weekend day and weekday - Regular
+    def test_weekend_an_weekday_regular(self): # Verify weekend day and weekday - Regular
         result = "Lakewood"
         self.assertEqual(result, get_cheapest_hotel("Regular: 29Mar2009(sun), 30Mar2009(mon)"))
+
+    def test_weekdays_count(self): # Count weekdays on a week
+        result = 5
+        week = ['Regular','22Mar2009(sun)','23Mar2009(mon)','24Mar2009(tues)','25Mar2009(wed)','26Mar2009(thur)','27Mar2009(fri)','28Mar2009(sat)']
+        self.assertEqual(result, get_date_type_count(week)['weekday_price'])
+
+    def test_weekend_count(self): # Count weekend days on a week
+        result = 2
+        week = ['Regular','22Mar2009(sun)','23Mar2009(mon)','24Mar2009(tues)','25Mar2009(wed)','26Mar2009(thur)','27Mar2009(fri)','28Mar2009(sat)']
+        self.assertEqual(result, get_date_type_count(week)['weekend_price'])
+
+    def test_only_weekdays(self): # Verify mistake count weekend but being weekday
+        result = 0
+        week = ['Rewards','23Mar2009(mon)','24Mar2009(tues)','25Mar2009(wed)','26Mar2009(thur)','27Mar2009(fri)']
+        self.assertEqual(result, get_date_type_count(week)['weekend_price'])
+
+    def test_only_weekend(self): # Verify mistake count weekday but being weekend
+        result = 0
+        week = ['Regular','22Mar2009(sun)','28Mar2009(sat)','23Mar2009(sun)','24Mar2009(sat)']
+        self.assertEqual(result, get_date_type_count(week)['weekday_price'])

@@ -17,7 +17,6 @@ def read_json(path):
     Parameter path: the json file path
     Returns a python dictionary
     """
-    # Read json file
     file = open(path)
 
     return json.load(file)
@@ -30,7 +29,7 @@ def set_better_choice(hotel_name, price, rating):
               rating: rating of the hotel
     Returns a python dictionary
     """
-    # Set best hotel option data
+
     value = {
         'name': hotel_name,
         'price': price,
@@ -45,7 +44,7 @@ def get_price_type(user_input):
     Parameter user_input: reservation date string
     Returns string
     """
-    # Check if the day is a weekday or if it is the weekend
+
     select_index_range = user_input.find('(') + 1
     day = user_input[select_index_range:-1]
 

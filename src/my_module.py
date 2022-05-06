@@ -19,15 +19,15 @@ def get_cheapest_hotel(user_input):   #DO NOT change the function's name
         weekend_price = hotels_data[hotel]['weekend_price'][reward_program_type] * date_type_count['weekend_price']
         hotel_price = weekday_price + weekend_price
 
-        #Check if is the first iteration
+        #Check if it is the first iteration
         if better_choice == None: 
             better_choice = set_better_choice(hotel, hotel_price, hotels_data[hotel]['rating'])
-        #Check if current hotel price is lower than the 'better_option' price
+        #Check if current hotel price is lower than the 'better_choice' price
         elif hotel_price < better_choice['price']: 
             better_choice = set_better_choice(hotel, hotel_price, hotels_data[hotel]['rating'])
-        #Check if current hotel price is equal to 'better_option' price
+        #Check if current hotel price is equal to 'better_choice' price
         elif hotel_price == better_choice['price']: 
-            #Check if current hotel rating is greater than 'better_option'
+            #Check if current hotel rating is greater than 'better_choice'
             if hotels_data[hotel]['rating'] > better_choice['rating']:
                 better_choice = set_better_choice(hotel, hotel_price, hotels_data[hotel]['rating'])
 
