@@ -73,7 +73,7 @@ class MyTest(TestCase):
         week = ['Rewards','23Mar2009(mon)','24Mar2009(tues)','25Mar2009(wed)','26Mar2009(thur)','27Mar2009(fri)']
         self.assertEqual(result, get_date_type_count(week)['weekend_price'])
 
-    def test_only_weekend(self): # Verify mistake count weekday but being weekend
+    def test_only_weekend(self): # Verify mistake count weekday but being weekend 
         result = 0
         week = ['Regular','22Mar2009(sun)','28Mar2009(sat)','23Mar2009(sun)','24Mar2009(sat)']
         self.assertEqual(result, get_date_type_count(week)['weekday_price'])

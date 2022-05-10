@@ -11,6 +11,58 @@ def parse_input(data):
     splitted_data = selected_data.split(',')
     return splitted_data
 
+def get_reward_program_type(user_input):
+    """
+    Shows whether the user is a regular or rewards user
+    Parameter user_input: List -> [<reward_program_type>,<day1>,<day2>,<day3>]
+    Returns string
+    """
+
+    return user_input[0]
+
+def get_price_type(user_input):
+    """
+    Shows whether the date is a weekday or weekend day
+    Parameter user_input: reservation date string
+    Returns string
+    """
+
+    select_index_range = user_input.find('(') + 1
+    day = user_input[select_index_range:-1]
+
+    dictionary = {
+        "mon": 'weekday_price',
+        "tues": 'weekday_price',
+        "wed": 'weekday_price',
+        "thur": 'weekday_price',
+        "fri": 'weekday_price',
+        
+        "sat": 'weekend_price',
+        "sun": 'weekend_price',
+    }
+
+    return dictionary[day]
+
+def get_date_type_count(user_input):
+    """
+    Counts how many days are weekdays or weekend days
+    Parameter user_input: List -> [<reward_program_type>,<day1>,<day2>,<day3>]
+    Returns dict
+    """
+    
+    date_list = user_input[1:]
+
+    price_type = []
+    for day in date_list:
+        price_type.append(get_price_type(day))
+
+    days_count = {
+        'weekday_price': price_type.count('weekday_price'),
+        'weekend_price': price_type.count('weekend_price'),
+    }
+
+    return days_count
+
 def read_json(path):
     """
     Read json file
@@ -37,55 +89,3 @@ def set_better_choice(hotel_name, price, rating):
     }
 
     return value
-
-def get_price_type(user_input):
-    """
-    Shows whether the date is a weekday or weekend day
-    Parameter user_input: reservation date string
-    Returns string
-    """
-
-    select_index_range = user_input.find('(') + 1
-    day = user_input[select_index_range:-1]
-
-    dictionary = {
-        "mon": 'weekday_price',
-        "tues": 'weekday_price',
-        "wed": 'weekday_price',
-        "thur": 'weekday_price',
-        "fri": 'weekday_price',
-        
-        "sat": 'weekend_price',
-        "sun": 'weekend_price',
-    }
-
-    return dictionary[day]
-
-def get_reward_program_type(user_input):
-    """
-    Shows whether the user is a regular or rewards user
-    Parameter user_input: List -> [<reward_program_type>,<day1>,<day2>,<day3>]
-    Returns string
-    """
-
-    return user_input[0]
-
-def get_date_type_count(user_input):
-    """
-    Counts how many days are weekdays or weekend days
-    Parameter user_input: List -> [<reward_program_type>,<day1>,<day2>,<day3>]
-    Returns dict
-    """
-    
-    date_list = user_input[1:]
-
-    price_type = []
-    for day in date_list:
-        price_type.append(get_price_type(day))
-
-    days_count = {
-        'weekday_price': price_type.count('weekday_price'),
-        'weekend_price': price_type.count('weekend_price'),
-    }
-
-    return days_count
