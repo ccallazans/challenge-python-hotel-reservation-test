@@ -1,19 +1,19 @@
-from src.functions import standardize_input, read_json
+from src.functions import parse_input, read_json
 from src.functions import get_reward_program_type, get_date_type_count
 from src.functions import set_better_choice
 
 def get_cheapest_hotel(user_input):   #DO NOT change the function's name
 
-    handled_user_input = standardize_input(user_input)
+    parsed_user_input = parse_input(user_input)
     
-    reward_program_type = get_reward_program_type(handled_user_input)
-    date_type_count = get_date_type_count(handled_user_input)
+    reward_program_type = get_reward_program_type(parsed_user_input)
+    date_type_count = get_date_type_count(parsed_user_input)
 
     hotels_data = read_json('src/hotels.json')
     hotels_data = hotels_data['hotels']
 
     better_choice = None
-    #Iterate through registered hotels on 'hotels.json'
+    #Iterate through registered hotels names on 'hotels.json'
     for hotel in hotels_data.keys():
         weekday_price = hotels_data[hotel]['weekday_price'][reward_program_type] * date_type_count['weekday_price']
         weekend_price = hotels_data[hotel]['weekend_price'][reward_program_type] * date_type_count['weekend_price']

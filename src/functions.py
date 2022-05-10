@@ -1,14 +1,14 @@
 import json
 
-def standardize_input(data):
+def parse_input(data):
     """
     Standardize user input(data), leaving it in list format
     Parameter data: user input string
     Returns the list [<reward_program_type>,<day1>,<day2>,<day3>]
     """
+
     selected_data = data.replace(':',',').replace(" ", "")
     splitted_data = selected_data.split(',')
-
     return splitted_data
 
 def read_json(path):
@@ -17,8 +17,8 @@ def read_json(path):
     Parameter path: the json file path
     Returns a python dictionary
     """
-    file = open(path)
 
+    file = open(path)
     return json.load(file)
 
 def set_better_choice(hotel_name, price, rating):
@@ -67,6 +67,7 @@ def get_reward_program_type(user_input):
     Parameter user_input: List -> [<reward_program_type>,<day1>,<day2>,<day3>]
     Returns string
     """
+
     return user_input[0]
 
 def get_date_type_count(user_input):
@@ -75,6 +76,7 @@ def get_date_type_count(user_input):
     Parameter user_input: List -> [<reward_program_type>,<day1>,<day2>,<day3>]
     Returns dict
     """
+    
     date_list = user_input[1:]
 
     price_type = []
